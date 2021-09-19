@@ -11,23 +11,7 @@ interface CoinsPageProps {
 }
 
 const CoinsPage = ({ coins }: CoinsPageProps) => {
-  return (
-    // <>
-    //   {coins &&
-    //     coins
-    //       .filter((coin) => {
-    //         return !userCoins.some((userCoin) => userCoin.id === coin.id);
-    //       })
-    //       .map((item) => {
-    //         return (
-    //           <div key={item.id} onClick={() => addCoin(item)}>
-    //             {item.symbol} ({item.name})
-    //           </div>
-    //         );
-    //       })}
-    // </>
-    <BasicList coins={coins} />
-  );
+  return <BasicList coins={coins} />;
 };
 
 CoinsPage.getLayout = function getLayout(page: ReactElement) {

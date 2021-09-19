@@ -11,7 +11,9 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import TrendingDownIcon from '@material-ui/icons/TrendingDown';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { useActions } from 'hooks/useActions';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import React from 'react';
@@ -56,7 +58,8 @@ const Row: React.FC<RowProps> = ({ coin }) => {
 
   React.useEffect(() => {
     addSum({ id, sum: holdings * priceUSD - netCosts });
-  }, [holdings, netCosts, priceUSD]);
+  }, [holdings, id, netCosts, priceUSD]);
+
   React.useEffect(() => {
     let sumHoldings = 0;
     let sumNetCosts = 0;
@@ -68,7 +71,6 @@ const Row: React.FC<RowProps> = ({ coin }) => {
 
         setHoldings(+sumHoldings.toFixed(6));
         setNetCosts(+sumNetCosts.toFixed(2));
-        // setMarketValue(((holdings * priceUSD) / netCosts - 1) * 100);
       }
     });
   }, [id, transactions]);
@@ -82,7 +84,7 @@ const Row: React.FC<RowProps> = ({ coin }) => {
             size="small"
             onClick={() => setOpen(!open)}
           >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
@@ -162,11 +164,7 @@ const Row: React.FC<RowProps> = ({ coin }) => {
             </Grid>
           </Grid>
           {priceUSD.toFixed(2)}
-          {percentChange24h > 0 ? (
-            <KeyboardArrowUpIcon />
-          ) : (
-            <KeyboardArrowDownIcon />
-          )}
+          {percentChange24h > 0 ? <TrendingUpIcon /> : <TrendingDownIcon />}
         </TableCell>
       </TableRow>
       <TableRow>

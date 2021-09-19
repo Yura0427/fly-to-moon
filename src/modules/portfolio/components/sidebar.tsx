@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
 
     if (sum)
       sum.map((i: any) => {
-        sumI += i.id;
+        sumI += i.sum;
       });
     setAllSum(sumI);
   }, [sum]);
@@ -61,7 +61,6 @@ const Sidebar: React.FC = () => {
           <Typography className={classes.block} variant="h6" noWrap>
             $ {allSum.toFixed(2)}
           </Typography>
-
           <Typography className={classes.title} variant="h6" noWrap>
             FlyToMoon
             <IoRocketSharp />

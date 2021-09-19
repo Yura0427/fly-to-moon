@@ -45,49 +45,10 @@ const SimpleModal: React.FC<SimpleModalProps> = ({ coin }) => {
   };
 
   const saveTransaction = () => {
-    // if (localStorage.getItem('transactions')) {
-    //   const data = JSON.parse(localStorage.getItem('transactions') as string);
-
-    //   if (Array.isArray(data)) {
-    //     data.map((item) => {
-    //       if (item.id === coin.id) {
-    //         const newItem = {
-    //           ...item,
-    //           holdings: +item.holdings + +quantity,
-    //           netCosts: +quantity * coin.priceUSD + item.netCosts,
-    //         };
-    //         console.log('newItem', newItem);
-    //         data.filter((item) => {
-    //           if (item.id === coin.id) console.log(newItem);
-    //           else console.log(item);
-    //         });
-    //       } else {
-    //         data.push({
-    //           id: coin.id,
-    //           holdings: +quantity,
-    //           netCosts: +quantity * coin.priceUSD,
-    //         });
-    //         localStorage.setItem('transactions', JSON.stringify(data));
-    //       }
-    //     });
-    //     console.log(data);
-    //   }
-    // } else
-    //   localStorage.setItem(
-    //     'transactions',
-    //     JSON.stringify([
-    //       {
-    //         id: coin.id,
-    //         holdings: +quantity,
-    //         netCosts: +quantity * coin.priceUSD,
-    //       },
-    //     ])
-    //   );
     addTransaction({
       id: +coin.id,
       holdings: +quantity,
       currentPrice: +coin.priceUSD,
-      //.toFixed(2)
     });
 
     handleClose();

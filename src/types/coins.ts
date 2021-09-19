@@ -8,7 +8,6 @@ export interface ICoin {
 
 export interface CoinsState {
   userCoins: ICoin[];
-  userCoinsID: [] | number[];
   err: string;
   transactions: Transaction[];
   sum: ISum[] | [];
