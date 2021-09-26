@@ -1,28 +1,51 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Typography } from '@material-ui/core';
-import { useActions } from 'hooks/useActions';
 import { useTypedSelector } from 'hooks/useTypedSelector';
+import { useRouter } from 'next/router';
 import React, { ReactElement } from 'react';
+import { useDispatch } from 'react-redux';
+import { CoinsActionTypes, ICoin } from 'types/coins';
 
 import Layout from '../components/layout';
 import Sidebar from '../components/sidebar';
 import CollapsibleTable from '../components/table';
 
-const PortfolioListingPage = () => {
+interface PageProps {
+  allCoins: ICoin[];
+  userCoinsSSR: ICoin[];
+}
+
+const PortfolioListingPage = ({ allCoins, userCoinsSSR }: PageProps) => {
+  const router = useRouter();
+
   const { userCoins } = useTypedSelector((state) => state.coins);
-  const { fetchQuotes } = useActions();
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     let req = '';
 
+    allCoins
+      ? dispatch({ type: CoinsActionTypes.FETCH_ALL_COINS, payload: allCoins })
+      : dispatch({
+          type: CoinsActionTypes.FETCH_COINS_ERR,
+          payload: `FETCH_ALL_COINS_ERROR`,
+        });
     userCoins.map((item) => {
       if (!req) req = `${item.id}`;
       else req += `,${item.id}`;
     });
 
-    if (req) fetchQuotes(req);
+    // if (req) fetchQuotes(req);
+    userCoinsSSR.length > 0
+      ? dispatch({ type: CoinsActionTypes.FETCH_COINS, payload: userCoinsSSR })
+      : dispatch({
+          type: CoinsActionTypes.FETCH_COINS_ERR,
+          payload: `FETCH_COINS_ERR`,
+        });
+    if (userCoins.length > 0) router.push(`?${req}`);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userCoins]);
 
   return (
     <>

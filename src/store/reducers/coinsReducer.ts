@@ -2,6 +2,7 @@
 /* eslint-disable unicorn/no-nested-ternary */
 import { CoinsAction, CoinsActionTypes, CoinsState } from './../../types/coins';
 export const initialState: CoinsState = {
+  allCoins: [],
   userCoins: [],
   err: '',
   transactions: [],
@@ -13,6 +14,12 @@ export const coinsReducer = (
   action: CoinsAction
 ): CoinsState => {
   switch (action.type) {
+    case CoinsActionTypes.FETCH_ALL_COINS:
+      return {
+        ...state,
+        err: '',
+        allCoins: action.payload,
+      };
     case CoinsActionTypes.FETCH_COINS:
       return {
         ...state,

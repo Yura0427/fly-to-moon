@@ -7,6 +7,7 @@ export interface ICoin {
 }
 
 export interface CoinsState {
+  allCoins: ICoin[];
   userCoins: ICoin[];
   err: string;
   transactions: Transaction[];
@@ -25,6 +26,7 @@ export interface ISum {
 }
 
 export enum CoinsActionTypes {
+  FETCH_ALL_COINS = 'FETCH_ALL_COINS',
   FETCH_COINS = 'FETCH_COINS',
   FETCH_COINS_ERR = 'FETCH_COINS_ERR',
   ADD_COIN = 'ADD_COIN',
@@ -32,6 +34,10 @@ export enum CoinsActionTypes {
   ADD_SUM = 'ADD_SUM',
 }
 
+interface FetchAllCoinsAction {
+  type: CoinsActionTypes.FETCH_ALL_COINS;
+  payload: ICoin[];
+}
 interface FetchCoinsAction {
   type: CoinsActionTypes.FETCH_COINS;
   payload: ICoin[];
@@ -57,6 +63,7 @@ interface AddSumAction {
 }
 
 export type CoinsAction =
+  | FetchAllCoinsAction
   | FetchCoinsAction
   | FetchCoinsErrorAction
   | AddCoinAction

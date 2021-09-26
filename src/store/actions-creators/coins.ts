@@ -29,7 +29,7 @@ export const fetchCoins = () => {
           });
         });
       });
-      dispatch({ type: CoinsActionTypes.FETCH_COINS, payload: arr });
+      dispatch({ type: CoinsActionTypes.FETCH_ALL_COINS, payload: arr });
     } catch (error) {
       dispatch({
         type: CoinsActionTypes.FETCH_COINS_ERR,
