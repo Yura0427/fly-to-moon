@@ -63,7 +63,7 @@ const PortfolioListingPage = ({ allCoins, userCoinsSSR }: PageProps) => {
 
 PortfolioListingPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout>
+    <Layout title={undefined} description={undefined}>
       <Sidebar />
       {page}
     </Layout>
